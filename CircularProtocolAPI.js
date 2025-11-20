@@ -12,7 +12,7 @@
         Update  : 28/01/2025
         
         Originator: Gianluca De Novi, PhD
-        Contributors: Danny De Novi           
+        Contributors: Danny De Novi, Ashley Barr
         
 *******************************************************************************/
 
@@ -303,11 +303,19 @@ var CircularProtocolAPI = (function () {
 
     /* WALLET FUNCTIONS  **********************************************************/
 
-    /* 
-     *  Checks if a Wallet is registered on the chain 
-     *  
-     *  Blockchain: Blockchain where the wallet is registered
-     *  Address: Wallet Address
+    /**
+     * Checks if a wallet is registered on the blockchain
+     * 
+     * @param {string} blockchain - Blockchain network identifier (e.g., 'MainNet')
+     * @param {string} address - Wallet address to check (with or without 0x prefix)
+     * @returns {Promise<Object>} Response with Result code and wallet existence status
+     * 
+     * @example
+     * const result = await CircularProtocolAPI.checkWallet(
+     *   'MainNet',
+     *   '0x742d35Cc6634C0532925a3b844f2DF933a7E3c64'
+     * );
+     * console.log(result.Response.exists); // true or false
      */
     async function checkWallet(blockchain, address) {
         let data = {
@@ -336,11 +344,19 @@ var CircularProtocolAPI = (function () {
     }
 
 
-    /* 
-     *  Retrieves a Wallet 
-     *  
-     *  Blockchain: Blockchain where the wallet is registered
-     *  Address: Wallet Address
+    /**
+     * Retrieves detailed information about a wallet
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @param {string} address - Wallet address
+     * @returns {Promise<Object>} Wallet details including balance, nonce, and metadata
+     * 
+     * @example
+     * const wallet = await CircularProtocolAPI.getWallet(
+     *   'MainNet',
+     *   '0x742d35Cc6634C0532925a3b844f2DF933a7E3c64'
+     * );
+     * console.log(wallet.Response);
      */
     async function getWallet(blockchain, address) {
         let data = {

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:e2e": "jest __tests__/e2e.test.js --testTimeout=30000"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,8 @@
   ],
   "author": "Gianluca De Novi, PhD",
   "contributors": [
-    "Danny De Novi"
+    "Danny De Novi",
+    "Ashley Barr"
   ],
   "license": "MIT",
   "bugs": {

@@ -42,6 +42,46 @@ For detailed information on all available methods and parameters, refer to the [
 
 ... and many more!
 
+## Testing
+
+The SDK includes comprehensive test coverage:
+
+### Unit Tests
+Test individual API methods with mocked network calls:
+```bash
+npm test
+```
+
+### Integration Tests  
+Test multiple components working together:
+```bash
+npm test -- __tests__/integration.test.js
+```
+
+### E2E Tests
+Test against real NAG endpoints (requires test wallet address):
+```bash
+# Set test wallet address
+export CIRCULAR_TEST_ADDRESS=0x742d35Cc6634C0532925a3b8...
+
+# Run E2E tests
+npm run test:e2e
+```
+
+#### E2E Configuration
+- `CIRCULAR_TEST_ADDRESS` (required) - Test wallet address
+- `CIRCULAR_NAG_URL` (optional) - Custom NAG endpoint
+- `CIRCULAR_TEST_BLOCKCHAIN` (optional) - Blockchain ID
+- `CIRCULAR_API_KEY` (optional) - API key
+
+For more details, see [E2E_TESTING.md](./E2E_TESTING.md).
+
+### Coverage
+View test coverage report:
+```bash
+npm run test:coverage
+```
+
 ## 🤝 **Contributing**
 
 Contributions to the Circular Library are welcome! To contribute:
@@ -66,7 +106,7 @@ This project is open-source and available under the MIT License for both private
 ## 👥 **Authors and Acknowledgment**
 
 - **Originator**: Gianluca De Novi, PhD
-- **Contributors**: Danny De Novi
+- **Contributors**: Danny De Novi, Ashley Barr
 
 ## 📧 **Contact**
 
