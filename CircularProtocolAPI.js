@@ -385,11 +385,19 @@ var CircularProtocolAPI = (function () {
     }
 
 
-    /* 
-     *  Retrieves a Wallet 
-     *  
-     *  Blockchain: Blockchain where the wallet is registered
-     *  Address: Wallet Address
+    /**
+     * Retrieves the latest transactions for a wallet
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @param {string} address - Wallet address
+     * @returns {Promise<Object>} List of recent transactions involved with this wallet
+     * 
+     * @example
+     * const txs = await CircularProtocolAPI.getLatestTransactions(
+     *   'MainNet',
+     *   '0x742d35Cc6634C0532925a3b844f2DF933a7E3c64'
+     * );
+     * console.log(txs.Response);
      */
     async function getLatestTransactions(blockchain, address) {
         let data = {
@@ -419,11 +427,21 @@ var CircularProtocolAPI = (function () {
 
 
 
-    /* 
-     *   Retrieves the balance of a specified asset in a Wallet
-     *   Blockchain: Blockchain where the wallet is registered
-     *   Address: Wallet address
-     *   Asset: Asset Name (example 'CIRX')
+    /**
+     * Retrieves the balance of a specified asset in a wallet
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @param {string} address - Wallet address
+     * @param {string} asset - Asset name (e.g., 'CIRX')
+     * @returns {Promise<Object>} Balance information for the specified asset
+     * 
+     * @example
+     * const balance = await CircularProtocolAPI.getWalletBalance(
+     *   'MainNet',
+     *   '0x742d35Cc6634C0532925a3b844f2DF933a7E3c64',
+     *   'CIRX'
+     * );
+     * console.log(balance.Response);
      */
     async function getWalletBalance(blockchain, address, asset) {
         let data = {
@@ -453,10 +471,19 @@ var CircularProtocolAPI = (function () {
     }
 
 
-    /* 
-     *   Retrieves the Nonce of a Wallet
-     *   Blockchain: Blockchain where the wallet is registered
-     *   Address: Wallet address
+    /**
+     * Retrieves the current nonce of a wallet
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @param {string} address - Wallet address
+     * @returns {Promise<Object>} Current nonce value
+     * 
+     * @example
+     * const nonce = await CircularProtocolAPI.getWalletNonce(
+     *   'MainNet',
+     *   '0x742d35Cc6634C0532925a3b844f2DF933a7E3c64'
+     * );
+     * console.log(nonce.Response);
      */
     async function getWalletNonce(blockchain, address) {
         let data = {
@@ -486,13 +513,21 @@ var CircularProtocolAPI = (function () {
 
 
 
-    /* 
-     *   Register a wallet on a desired blockchain.
-     *   The same wallet can be registered on multiple blockchains
-     *   Blockchain: Blockchain where the wallet will be registered
-     *   PublicKey: Wallet PublicKey
-     *   
-     *   Without registration on the blockchain the wallet will not be reachable
+    /**
+     * Registers a wallet on a desired blockchain
+     * 
+     * The same wallet can be registered on multiple blockchains.
+     * Without registration, the wallet will not be reachable.
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @param {string} publicKey - Wallet public key
+     * @returns {Promise<Object>} Transaction result
+     * 
+     * @example
+     * const result = await CircularProtocolAPI.registerWallet(
+     *   'MainNet',
+     *   '02c3...' // Compressed public key
+     * );
      */
     async function registerWallet(blockchain, publicKey) {
         let From = sha256(publicKey);
@@ -520,11 +555,19 @@ var CircularProtocolAPI = (function () {
     /* DOMAINS MANAGEMENT *********************************************************/
 
 
-    /* 
-     *  Resolves the domain name returning the wallet address associated to the domain name
-     *  A single wallet can have multiple domains associations
-     *  Blockchain : Blockchain where the domain and wallet are registered
-     *  Name: Domain Name
+    /**
+     * Resolves a domain name to a wallet address
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @param {string} name - Domain name to resolve
+     * @returns {Promise<Object>} Wallet address associated with the domain
+     * 
+     * @example
+     * const domain = await CircularProtocolAPI.getDomain(
+     *   'MainNet',
+     *   'mywallet.cirx'
+     * );
+     * console.log(domain.Response);
      */
     async function getDomain(blockchain, name) {
         let data = {
@@ -557,9 +600,15 @@ var CircularProtocolAPI = (function () {
     /// PARAMETRIC ASSETS MANAGEMENT ///////////////////////////////////////////////////////////////////////////////////////
 
 
-    /* 
-     *  Retrieves the list of all assets minted on a specific blockchain
-     *  Blockchain: Blockchin where to request the list
+    /**
+     * Retrieves the list of all assets minted on a specific blockchain
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @returns {Promise<Object>} List of available assets
+     * 
+     * @example
+     * const assets = await CircularProtocolAPI.getAssetList('MainNet');
+     * console.log(assets.Response);
      */
     async function getAssetList(blockchain) {
         let data = {
@@ -588,10 +637,16 @@ var CircularProtocolAPI = (function () {
 
 
 
-    /* 
-     *  Retrieves an Asset Descriptor
-     *  Blockchain: Blockchain where the asset is minted
-     *  Name: Asset Name (example 'CIRX')
+    /**
+     * Retrieves an asset descriptor
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @param {string} name - Asset name (e.g., 'CIRX')
+     * @returns {Promise<Object>} Asset details and metadata
+     * 
+     * @example
+     * const asset = await CircularProtocolAPI.getAsset('MainNet', 'CIRX');
+     * console.log(asset.Response);
      */
     async function getAsset(blockchain, name) {
         let data = {
@@ -621,10 +676,16 @@ var CircularProtocolAPI = (function () {
 
 
 
-    /* 
-     *  Retrieve The total, circulating and residual supply of a specified asset
-     *  Blockchain: Blockchain where the asset is minted
-     *  Name: Asset Name (example 'CIRX')
+    /**
+     * Retrieves the total, circulating, and residual supply of a specified asset
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @param {string} name - Asset name (e.g., 'CIRX')
+     * @returns {Promise<Object>} Supply statistics for the asset
+     * 
+     * @example
+     * const supply = await CircularProtocolAPI.getAssetSupply('MainNet', 'CIRX');
+     * console.log(supply.Response);
      */
     async function getAssetSupply(blockchain, name) {
         let data = {
@@ -656,10 +717,19 @@ var CircularProtocolAPI = (function () {
 
     // VOUCHERS MANAGEMENT//////////////////////////////////////////////////////////
 
-    /* 
-     *  Retrieves an existing Voucher
-     *  Blockchain: blockchain where the voucher was minted
-     *  Code: voucher code
+    /**
+     * Retrieves an existing voucher
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @param {string} code - Voucher code (with or without 0x prefix)
+     * @returns {Promise<Object>} Voucher details
+     * 
+     * @example
+     * const voucher = await CircularProtocolAPI.getVoucher(
+     *   'MainNet',
+     *   '0x1234567890abcdef'
+     * );
+     * console.log(voucher.Response);
      */
     async function getVoucher(blockchain, code) {
 
@@ -697,13 +767,22 @@ var CircularProtocolAPI = (function () {
 
     // BLOCKS MANAGEMENT //////////////////////////////////////////////////////////////////////////////////
 
-    /* 
-     *  Retrieve All blocks in a specified range
-     *  Blockchain: blockchain where to search the blocks
-     *  Start: Initial block
-     *  End: End block
-     *  
-     *  If End = 0, then Start is the number of blocks from the last one minted going backward.
+    /**
+     * Retrieves a range of blocks
+     * 
+     * If end is 0, start is interpreted as the number of blocks from the last one minted going backward.
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @param {number|string} start - Start block number or count from tip
+     * @param {number|string} end - End block number (0 for relative range)
+     * @returns {Promise<Object>} List of blocks in the specified range
+     * 
+     * @example
+     * // Get blocks 100 to 110
+     * const blocks = await CircularProtocolAPI.getBlockRange('MainNet', 100, 110);
+     * 
+     * // Get last 10 blocks
+     * const last10 = await CircularProtocolAPI.getBlockRange('MainNet', 10, 0);
      */
     async function getBlockRange(blockchain, start, end) {
         let data = {
@@ -733,10 +812,16 @@ var CircularProtocolAPI = (function () {
     }
 
 
-    /* 
-     *  Retrieve a desired block
-     *  Blockchain: blockchain where to search the block
-     *  Num: Block number 
+    /**
+     * Retrieves a specific block by its number
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @param {number|string} num - Block number to retrieve
+     * @returns {Promise<Object>} Block details
+     * 
+     * @example
+     * const block = await CircularProtocolAPI.getBlock('MainNet', 12345);
+     * console.log(block.Response);
      */
     async function getBlock(blockchain, num) {
         let data = {
@@ -765,10 +850,15 @@ var CircularProtocolAPI = (function () {
     }
 
 
-    /* 
-     *   Retrieves the blockchain block height
-     *   
-     *   Blockchain: blockchain where to count the blocks
+    /**
+     * Retrieves the current block height of the blockchain
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @returns {Promise<Object>} Current block height
+     * 
+     * @example
+     * const height = await CircularProtocolAPI.getBlockCount('MainNet');
+     * console.log(height.Response);
      */
     async function getBlockCount(blockchain) {
         let data = {
@@ -799,10 +889,15 @@ var CircularProtocolAPI = (function () {
 
     // ANALYTICS ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /* 
-     *   Retrieves the Blockchain  Amalytics
-     *   
-     *   Blockchain: selected blockchain
+    /**
+     * Retrieves blockchain analytics
+     * 
+     * @param {string} blockchain - Blockchain network identifier
+     * @returns {Promise<Object>} Analytics data including transaction volume and active nodes
+     * 
+     * @example
+     * const analytics = await CircularProtocolAPI.getAnalytics('MainNet');
+     * console.log(analytics.Response);
      */
     async function getAnalytics(blockchain) {
         let data = {
@@ -830,9 +925,14 @@ var CircularProtocolAPI = (function () {
     }
 
 
-    /* 
-     *   Get The list of blockchains available in the network
-     *   
+    /**
+     * Retrieves the list of available blockchains in the network
+     * 
+     * @returns {Promise<Object>} List of blockchain networks
+     * 
+     * @example
+     * const chains = await CircularProtocolAPI.getBlockchains();
+     * console.log(chains.Response);
      */
     async function getBlockchains() {
         let data = {};
@@ -1177,6 +1277,7 @@ var CircularProtocolAPI = (function () {
         getTransactionbyAddress: getTransactionbyAddress,
         getTransactionbyDate: getTransactionbyDate,
         sendTransaction: sendTransaction,
+        sendBatch: sendBatch,
         getTransactionOutcome: getTransactionOutcome
 
     };
